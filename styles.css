@@ -1,0 +1,222 @@
+:root {
+    /* Color Tokens */
+    --bg-color: #000000;
+    --display-color: #ffffff;
+    --btn-num-bg: #333333;
+    --btn-num-text: #ffffff;
+    --btn-action-bg: #a5a5a5;
+    --btn-action-text: #000000;
+    --btn-operator-bg: #ff9f0a;
+    --btn-operator-text: #ffffff;
+    --btn-operator-active: #ffffff;
+    --btn-operator-active-text: #ff9f0a;
+
+    --history-bg: #1c1c1e;
+    --history-text: #8e8e93;
+    --history-divider: #38383a;
+    
+    /* Spacing & Sizing */
+    --gap: 1.5vh;
+    --padding: 3vh 3vw;
+    --btn-size: min(18vw, 12vh);
+    --border-radius: 50%;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--display-color);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+}
+
+.app-container {
+    width: 100%;
+    max-width: min(100vw, 65vh);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding);
+}
+
+/* History Panel */
+.history-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    margin-bottom: 2vh;
+    position: relative;
+    border-radius: 2vh;
+    background-color: var(--history-bg);
+    padding: 2vh;
+}
+
+.history-header {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--history-text);
+    text-align: center;
+    letter-spacing: 1px;
+    margin-top: 1vh;
+    border-top: 1px solid var(--history-divider);
+    padding-top: 1vh;
+}
+
+.history-list {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    scrollbar-width: thin;
+    scrollbar-color: var(--history-divider) transparent;
+}
+
+.history-list::-webkit-scrollbar {
+    width: 0.5vw;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+    background-color: var(--history-divider);
+    border-radius: 4px;
+}
+
+.history-item {
+    text-align: right;
+    animation: fadeIn 0.3s ease;
+}
+
+.history-expr {
+    color: var(--history-text);
+    font-size: clamp(0.8rem, 2vh, 1rem);
+    margin-bottom: 0.5vh;
+}
+
+.history-res {
+    color: var(--display-color);
+    font-size: clamp(1rem, 2.5vh, 1.2rem);
+    font-weight: 500;
+}
+
+/* Calculator Area */
+.calculator {
+    display: flex;
+    flex-direction: column;
+}
+
+.display {
+    text-align: right;
+    padding-bottom: 3vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 15vh;
+}
+
+.previous-operand {
+    color: var(--history-text);
+    font-size: clamp(1rem, 3vh, 1.5rem);
+    min-height: 3vh;
+}
+
+.current-operand {
+    font-size: clamp(2.5rem, 8vh, 4.5rem);
+    font-weight: 300;
+    line-height: 1;
+    word-break: break-all;
+    transition: font-size 0.2s ease;
+}
+
+/* Keypad Grid */
+.keypad {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: var(--gap);
+    justify-items: center;
+}
+
+.btn {
+    width: var(--btn-size);
+    height: var(--btn-size);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: clamp(1.2rem, 3.5vh, 1.8rem);
+    font-weight: 400;
+    cursor: pointer;
+    font-family: inherit;
+    transition: filter 0.15s ease, background-color 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn:active {
+    filter: brightness(1.4);
+}
+
+.btn-number {
+    background-color: var(--btn-num-bg);
+    color: var(--btn-num-text);
+}
+
+.btn-action {
+    background-color: var(--btn-action-bg);
+    color: var(--btn-action-text);
+}
+
+/* Action buttons have slightly smaller text sometimes */
+.btn-action[data-action="fraction"], 
+.btn-action[data-action="sqrt"] {
+    font-size: clamp(1rem, 3vh, 1.4rem);
+}
+
+.btn-operator, .btn-equals {
+    background-color: var(--btn-operator-bg);
+    color: var(--btn-operator-text);
+    font-size: clamp(1.5rem, 4.5vh, 2.2rem);
+}
+
+/* Highlight active operator */
+.btn-operator.active {
+    background-color: var(--btn-operator-active);
+    color: var(--btn-operator-active-text);
+}
+
+/* Make zero button wider if we want apple style, but since it's 1/x, 0, ., = we don't need a wide 0 */
+/* Let's keep 0 as a circle for consistency with our 4-col layout that includes 1/x */
+
+/* Responsive Adjustments for Landscape / Desktop */
+@media (min-width: 600px) and (orientation: landscape) {
+    .app-container {
+        max-width: 800px;
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 32px;
+    }
+
+    .history-panel {
+        margin-bottom: 0;
+        height: 100%;
+    }
+
+    .calculator {
+        flex: 1.5;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
