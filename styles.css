@@ -16,9 +16,9 @@
     --history-divider: #38383a;
     
     /* Spacing & Sizing */
-    --gap: 1.5vh;
-    --padding: 3vh 3vw;
-    --btn-size: min(18vw, 12vh);
+    --gap: 1.5dvh;
+    --padding: 3dvh 3vw;
+    --btn-size: min(18vw, 8.5dvh);
     --border-radius: 50%;
 }
 
@@ -33,7 +33,8 @@ body {
     background-color: var(--bg-color);
     color: var(--display-color);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    height: 100vh;
+    min-height: 100vh; /* Fallback */
+    height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: flex-end;
@@ -42,7 +43,7 @@ body {
 
 .app-container {
     width: 100%;
-    max-width: min(100vw, 65vh);
+    max-width: min(100vw, 65dvh);
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -56,11 +57,11 @@ body {
     flex-direction: column;
     justify-content: flex-end;
     overflow: hidden;
-    margin-bottom: 2vh;
+    margin-bottom: 2dvh;
     position: relative;
-    border-radius: 2vh;
+    border-radius: 2dvh;
     background-color: var(--history-bg);
-    padding: 2vh;
+    padding: 2dvh;
 }
 
 .history-header {
@@ -69,16 +70,16 @@ body {
     color: var(--history-text);
     text-align: center;
     letter-spacing: 1px;
-    margin-top: 1vh;
+    margin-top: 1dvh;
     border-top: 1px solid var(--history-divider);
-    padding-top: 1vh;
+    padding-top: 1dvh;
 }
 
 .history-list {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 1vh;
+    gap: 1dvh;
     scrollbar-width: thin;
     scrollbar-color: var(--history-divider) transparent;
 }
@@ -99,13 +100,13 @@ body {
 
 .history-expr {
     color: var(--history-text);
-    font-size: clamp(0.8rem, 2vh, 1rem);
-    margin-bottom: 0.5vh;
+    font-size: clamp(0.8rem, 2dvh, 1rem);
+    margin-bottom: 0.5dvh;
 }
 
 .history-res {
     color: var(--display-color);
-    font-size: clamp(1rem, 2.5vh, 1.2rem);
+    font-size: clamp(1rem, 2.5dvh, 1.2rem);
     font-weight: 500;
 }
 
@@ -117,21 +118,21 @@ body {
 
 .display {
     text-align: right;
-    padding-bottom: 3vh;
+    padding-bottom: 2dvh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    min-height: 15vh;
+    min-height: 12dvh;
 }
 
 .previous-operand {
     color: var(--history-text);
-    font-size: clamp(1rem, 3vh, 1.5rem);
-    min-height: 3vh;
+    font-size: clamp(1rem, 3dvh, 1.5rem);
+    min-height: 3dvh;
 }
 
 .current-operand {
-    font-size: clamp(2.5rem, 8vh, 4.5rem);
+    font-size: clamp(2.5rem, 8dvh, 4.5rem);
     font-weight: 300;
     line-height: 1;
     word-break: break-all;
@@ -151,7 +152,7 @@ body {
     height: var(--btn-size);
     border: none;
     border-radius: var(--border-radius);
-    font-size: clamp(1.2rem, 3.5vh, 1.8rem);
+    font-size: clamp(1.2rem, 3.5dvh, 1.8rem);
     font-weight: 400;
     cursor: pointer;
     font-family: inherit;
@@ -178,13 +179,13 @@ body {
 /* Action buttons have slightly smaller text sometimes */
 .btn-action[data-action="fraction"], 
 .btn-action[data-action="sqrt"] {
-    font-size: clamp(1rem, 3vh, 1.4rem);
+    font-size: clamp(1rem, 3dvh, 1.4rem);
 }
 
 .btn-operator, .btn-equals {
     background-color: var(--btn-operator-bg);
     color: var(--btn-operator-text);
-    font-size: clamp(1.5rem, 4.5vh, 2.2rem);
+    font-size: clamp(1.5rem, 4.5dvh, 2.2rem);
 }
 
 /* Highlight active operator */
