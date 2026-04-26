@@ -16,9 +16,10 @@
     --history-divider: #38383a;
     
     /* Spacing & Sizing */
-    --gap: 1.5dvh;
-    --padding: 3dvh 3vw;
-    --btn-size: min(18vw, 8.5dvh);
+    --gap-x: min(3vw, 1.5dvh);
+    --gap-y: min(3vw, 1.5dvh);
+    --padding: 2dvh 4vw;
+    --btn-size: min(21vw, 10dvh);
     --border-radius: 50%;
 }
 
@@ -33,35 +34,41 @@ body {
     background-color: var(--bg-color);
     color: var(--display-color);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    min-height: 100vh; /* Fallback */
     height: 100dvh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     overflow: hidden;
 }
 
 .app-container {
     width: 100%;
-    max-width: min(100vw, 65dvh);
+    max-width: min(100vw, 70dvh);
     height: 100%;
+    max-height: 100dvh;
     display: flex;
     flex-direction: column;
     padding: var(--padding);
+    box-sizing: border-box;
 }
 
 /* History Panel */
 .history-panel {
-    flex: 1;
+    flex: 1 1 10%;
+    min-height: 0;
+    max-height: 20dvh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     overflow: hidden;
     margin-bottom: 2dvh;
     position: relative;
-    border-radius: 2dvh;
+    border-radius: 1rem;
     background-color: var(--history-bg);
-    padding: 2dvh;
+    padding: 1rem;
 }
 
 .history-header {
@@ -112,8 +119,10 @@ body {
 
 /* Calculator Area */
 .calculator {
+    flex: 0 0 auto;
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .display {
@@ -122,7 +131,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    min-height: 12dvh;
+    min-height: 15dvh;
 }
 
 .previous-operand {
@@ -142,17 +151,19 @@ body {
 /* Keypad Grid */
 .keypad {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: var(--gap);
-    justify-items: center;
+    grid-template-columns: repeat(4, var(--btn-size));
+    gap: var(--gap-y) var(--gap-x);
+    justify-content: center;
+    align-content: center;
 }
 
 .btn {
-    width: var(--btn-size);
-    height: var(--btn-size);
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
     border: none;
     border-radius: var(--border-radius);
-    font-size: clamp(1.2rem, 3.5dvh, 1.8rem);
+    font-size: clamp(1.2rem, calc(var(--btn-size) * 0.4), 1.8rem);
     font-weight: 400;
     cursor: pointer;
     font-family: inherit;
@@ -179,13 +190,13 @@ body {
 /* Action buttons have slightly smaller text sometimes */
 .btn-action[data-action="fraction"], 
 .btn-action[data-action="sqrt"] {
-    font-size: clamp(1rem, 3dvh, 1.4rem);
+    font-size: clamp(1rem, calc(var(--btn-size) * 0.35), 1.4rem);
 }
 
 .btn-operator, .btn-equals {
     background-color: var(--btn-operator-bg);
     color: var(--btn-operator-text);
-    font-size: clamp(1.5rem, 4.5dvh, 2.2rem);
+    font-size: clamp(1.5rem, calc(var(--btn-size) * 0.5), 2.2rem);
 }
 
 /* Highlight active operator */
